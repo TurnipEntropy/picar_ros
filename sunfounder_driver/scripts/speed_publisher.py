@@ -6,7 +6,7 @@ from std_msgs.msg import Byte
 def speed_publisher():
     pub = rospy.Publisher('pwm', Byte, queue_size=5)
     rospy.init_node('speed_pub', anonymous=True)
-    rate = rospy.Rate(0.1)
+    rate = rospy.Rate(0.25)
     i = 0
     increase = True
     while not rospy.is_shutdown():
@@ -18,9 +18,9 @@ def speed_publisher():
             increase = True
 
         if increase:
-            i += 1
+            i += 10
         else:
-            i -= 1
+            i -= 10
         rate.sleep()
 
 
