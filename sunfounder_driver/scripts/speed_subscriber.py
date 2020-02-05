@@ -11,7 +11,7 @@ class BackWheels:
 
     def callback(self, data):
         rospy.loginfo('received speed: {}'.format(data.data))
-        self.bwheels.speed(data.data)
+        self.bwheels.speed = data.data
 
     def listener(self):
         rospy.init_node('speed_listener', anonymous=True)
