@@ -11,6 +11,7 @@ find_package(catkin REQUIRED
   roscpp
   rospy
   std_msgs
+  geometry_msgs
   message_generation
 )
 
