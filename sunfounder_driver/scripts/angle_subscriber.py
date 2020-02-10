@@ -12,9 +12,17 @@ class FrontWheels:
         picar.setup()
 
     def callback(self, data):
-        rospy.loginfo('received steering: {}'.format(data.data))
-        # self.bwheels.speed = data.data
-        # self.bwheels.forward()
+        rospy.loginfo('received steering: {}'.format(data))
+        if data.direction == 'straight':
+            self.fwheels.turn(90)
+        else:
+            cur_angle = self.fwheels._angle
+            if data.direction == 'left':
+                target_angle = cur_angle - data.angle
+                self.fwheels.turn(target_angle)
+            elif data.direction == 'right':
+                target_angle = cur_angle + data.angle
+                self.fwheels.turn(target_angle)
 
     def listener(self):
         rospy.init_node('steering_listener', anonymous=True)
