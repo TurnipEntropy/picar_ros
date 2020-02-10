@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import rospy
 from SunFounder_PiCar.picar import front_wheels, back_wheels
 from SunFounder_PiCar import picar
@@ -22,22 +23,23 @@ class MovementSubscriber:
         cur_angle = self.fwheels.wheel.angle
         target_angle = cur_angle + angle
         cur_speed = self.bwheels.speed
-        if speed == 0.5:
+        if abs(speed) == 0.5:
             target_speed = cur_speed * speed
-        elif speed == 0:
+        elif speed == 0 and angle == 90:
             target_speed = 0.
             target_angle = 90.
         else:
             target_speed = cur_speed + speed
             if 25 >= target_speed >= 0 and speed > 0:
                 target_speed = 25
-            elif 0 >= target_speed >= -25 and speed < 0:
+            elif 25 >= target_speed >= 0 and speed < 0:
                 target_speed = 0
             elif 0 >= target_speed >= -25 and speed < 0:
                 target_speed = -25
             elif 0 >= target_speed >= -25 and speed > 0:
                 target_speed = 0
 
+        rospy.loginfo('API data: speed: {}, angle: {}'.format(target_speed, target_angle))
         self.fwheels.turn(target_angle)
         self.bwheels.speed = abs(target_speed)
         if target_speed < 0:
@@ -47,7 +49,7 @@ class MovementSubscriber:
 
     def listener(self):
         rospy.init_node('movement_listener', anonymous=True)
-        rospy.Subscriber('picar_teleop', Twist, self.callback)
+        rospy.Subscriber('picar_cmd_vel', Twist, self.callback)
         rospy.spin()
 
 
