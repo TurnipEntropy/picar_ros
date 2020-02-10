@@ -31,7 +31,7 @@ class MovementSubscriber:
             target_speed = cur_speed + speed
             if 25 >= target_speed >= 0 and speed > 0:
                 target_speed = 25
-            elif 0 >= target_speed >= -25 and speed > 0:
+            elif 0 >= target_speed >= -25 and speed < 0:
                 target_speed = 0
             elif 0 >= target_speed >= -25 and speed < 0:
                 target_speed = -25
