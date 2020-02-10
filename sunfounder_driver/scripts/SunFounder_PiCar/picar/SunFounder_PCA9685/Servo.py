@@ -36,6 +36,7 @@ class Servo(object):
 		self.pwm = PCA9685.PWM(bus_number=bus_number, address=address)
 		self.frequency = self._FREQUENCY
 		self.write(90)
+		self.angle = 90
 	
 	def _debug_(self,message):
 		if self._DEBUG:
@@ -83,6 +84,7 @@ class Servo(object):
 		val = self._angle_to_analog(angle)
 		val += self.offset
 		self.pwm.write(self.channel, 0, val)
+		self.angle = angle
 		self._debug_('Turn angle = %d' % angle)
 
 	@property

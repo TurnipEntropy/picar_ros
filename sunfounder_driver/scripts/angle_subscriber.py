@@ -16,7 +16,7 @@ class FrontWheels:
         if data.direction == 'straight':
             self.fwheels.turn(90)
         else:
-            cur_angle = self.fwheels._angle
+            cur_angle = self.fwheels.wheel.angle
             if data.direction == 'left':
                 target_angle = cur_angle - data.angle
                 self.fwheels.turn(target_angle)
