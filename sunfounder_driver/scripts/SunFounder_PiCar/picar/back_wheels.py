@@ -55,6 +55,8 @@ class Back_Wheels(object):
         self.right_wheel.pwm = _set_b_pwm
 
         self._speed = 0
+        self.last_dir_A = 1
+        self.last_dir_B = 1
 
         self.debug = debug
         self._debug_('Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A))
@@ -68,12 +70,14 @@ class Back_Wheels(object):
         ''' Move both wheels forward '''
         self.left_wheel.forward()
         self.right_wheel.forward()
+        self.last_dir_A = self.last_dir_B = 1
         self._debug_('Running forward')
 
     def backward(self):
         ''' Move both wheels backward '''
         self.left_wheel.backward()
         self.right_wheel.backward()
+        self.last_dir_A = self.last_dir_B = -1
         self._debug_('Running backward')
 
     def stop(self):
