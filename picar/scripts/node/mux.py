@@ -85,7 +85,7 @@ class Mux:
                 if abs(vel) <= self.min_pwm:
                     vel = 0.0
                 else:
-                    vel = int(vel / 1.5)
+                    vel = int(vel / 1.15)
 
             if publish:
                 self.publish_to_drive(vel, steer)
