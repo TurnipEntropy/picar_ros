@@ -70,14 +70,14 @@ class Back_Wheels(object):
         ''' Move both wheels forward '''
         self.left_wheel.forward()
         self.right_wheel.forward()
-        self.last_dir_A = self.last_dir_B = 1
+        self.last_dir_A = self.last_dir_B = -1 #TODO: switch when bug fixed
         self._debug_('Running forward')
 
     def backward(self):
         ''' Move both wheels backward '''
         self.left_wheel.backward()
         self.right_wheel.backward()
-        self.last_dir_A = self.last_dir_B = -1
+        self.last_dir_A = self.last_dir_B = 1
         self._debug_('Running backward')
 
     def stop(self):

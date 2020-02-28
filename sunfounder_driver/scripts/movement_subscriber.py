@@ -24,7 +24,7 @@ class MovementSubscriber:
         target_angle = cur_angle + angle
         cur_speed = self.bwheels.speed * self.bwheels.last_dir_A
         if abs(speed) == 0.5:
-            target_speed = cur_speed * speed
+            target_speed = int(cur_speed * speed)
         elif speed == 0 and angle == 90:
             target_speed = 0.
             target_angle = 90.

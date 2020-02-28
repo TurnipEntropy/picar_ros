@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="picar" name="mux" type="mux.py" output="screen">
+        <rosparam command="load" file="$(find picar)/params.yaml"/>
+    </node>
+    <node pkg="picar" name="key_tele" type="keyboard_teleop.py" output="screen">
+        <rosparam command="load" file="$(find picar)/params.yaml"/>
+    </node>
+</launch>
+

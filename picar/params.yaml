@@ -1,0 +1,15 @@
+keyboard_topic: "/pikey"
+brake_topic: "/brake_now"
+mux_topic: "/pimux"
+pose_topic: "/pipose"
+drive_topic: "/pidrive"
+
+mux_node: "picar_mux"
+key_node: "picar_key"
+key_mux_idx: 0
+brake_mux_idx: 1
+nav_mux_idx: 2
+
+max_steering_angle: 45
+min_pwm: 25
+max_pwm: 100

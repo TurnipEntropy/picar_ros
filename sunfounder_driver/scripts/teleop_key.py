@@ -31,7 +31,7 @@ class KeyboardControl:
         tty.setraw(sys.stdin.fileno())
         rlist, _, _ = select.select([sys.stdin], [], [], 3)
         if rlist:
-            key = sys.stdin.read(1)
+            key = sys.stdin.read(0.1)
         else:
             key = ''
 
