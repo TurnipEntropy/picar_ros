@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import math
 import numpy as np
 import time
@@ -22,7 +24,7 @@ class WallFollow:
         self.lidar_sub = Subscriber(lidar_topic, LaserScan, self.lidar_callback)
         self.drive_pub = Publisher(drive_topic, AckermannDriveStamped, queue_size=5)
 
-        self.D = 0.0
+        self.d = 0.0
         self.window_size = 1
         self.theta = math.pi / 4
 
@@ -55,13 +57,17 @@ class WallFollow:
 
         idx_b_r = 179
         idx_b_l = 359
-        idx_a_r = idx_b_r + round(math.degrees(self.theta), 0)
-        idx_a_l = idx_b_l - round(math.degrees(self.theta), 0)
+        idx_a_r = int(idx_b_r + round(math.degrees(self.theta), 0))
+        idx_a_l = int(idx_b_l - round(math.degrees(self.theta), 0))
 
         a_l = np.nanmean(data.ranges[idx_a_l - self.window_size: idx_a_l + self.window_size + 1])
         b_l = np.nanmean(data.ranges[idx_b_l - self.window_size: idx_b_l + self.window_size + 1])
         a_r = np.nanmean(data.ranges[idx_a_r - self.window_size: idx_a_r + self.window_size + 1])
         b_r = np.nanmean(data.ranges[idx_b_r - self.window_size: idx_b_r + self.window_size + 1])
+        a_l = a_l if a_l < 15 else 15
+        b_l = b_l if b_l < 15 else 15
+        a_r = a_r if a_r < 15 else 15
+        b_r = b_r if b_r < 15 else 15
         return a_l, b_l, a_r, b_r
 
     def distance_side(self, a, b):
