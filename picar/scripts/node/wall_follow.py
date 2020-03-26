@@ -36,7 +36,7 @@ class WallFollow:
 
         self.min_angle = 45
         self.max_angle = 135
-        self.servo_offset = 0.0
+        self.servo_offset = 90.0
         self.angle = 90.0
         self.velocity = 1.0
         self.freq = 300
