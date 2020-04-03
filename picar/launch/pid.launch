@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+    <node pkg="picar" name="wall_follow_node" type="wall_follow.py" output="screen">
+        <rosparam command="load" file="$(find picar)/params.yaml"/>
+    </node>
+</launch>

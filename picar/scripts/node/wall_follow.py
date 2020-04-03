@@ -34,12 +34,12 @@ class WallFollow:
         self.square_error = 0.0
         self.integral = 0.0
 
-        self.min_angle = 45
-        self.max_angle = 135
+        self.min_angle = -45
+        self.max_angle = 45
         self.servo_offset = 90.0
         self.angle = 90.0
         self.velocity = 1.0
-        self.freq = 300
+        self.freq = 70
 
 
         self.drive_msg = AckermannDriveStamped()
@@ -80,7 +80,7 @@ class WallFollow:
         return dt1
 
     def select_val(self, angle):
-        abs_angle = abs(angle)
+        abs_angle = abs(angle - self.servo_offset)
         if abs_angle > math.radians(20):
             velocity = self.speed_per_angle[20]
         elif abs_angle > math.radians(10):
@@ -101,6 +101,7 @@ class WallFollow:
         self.integral += error
         deriv = (error - prev_error) / self.freq
         angle = self.kp * error + self.kd * deriv + self.ki * self.integral
+        angle *= 180 / np.pi
         angle = self.limit_angle(angle)
         velocity = self.select_val(angle)
         return angle, velocity
